@@ -76,7 +76,7 @@ document.addEventListener('click', function(e){
             document.getElementById('num-span').innerHTML = movieHistory.length
             document.getElementById(`add-watchlist${e.target.dataset.add}`).innerHTML = `<p class="watchlist">Added to watchlist<i class="fa-solid fa-circle-check"></i></p>`
         }
-        
+    
     }
 })
 
