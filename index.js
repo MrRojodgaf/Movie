@@ -70,7 +70,7 @@ document.addEventListener('click', function(e){
         const clickedMovie = allMovieArray.filter(function(movie){
             return e.target.dataset.add === movie.imdbID
         })[0]
-        // const movieHistory = JSON.parse(localStorage.getItem("myList"))
+        myMovies = JSON.parse(localStorage.getItem("myList"))
         myMovies.push(clickedMovie)
         localStorage.setItem("myList", JSON.stringify(myMovies))
         document.getElementById('num-span').innerHTML = myMovies.length
