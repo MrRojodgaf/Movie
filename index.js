@@ -2,6 +2,7 @@ const text = document.getElementById('text')
 const searchBtn = document.getElementById('search-btn')
 const mode = document.getElementById('mode')
 let allMovieArray = []
+let myMovies = []
 
 mode.addEventListener('click', function(){
     document.body.classList.toggle('black')
@@ -70,9 +71,9 @@ document.addEventListener('click', function(e){
             return e.target.dataset.add === movie.imdbID
         })[0]
         // const movieHistory = JSON.parse(localStorage.getItem("myList"))
-        // movieHistory.push(clickedMovie)
-        // localStorage.setItem("myList", JSON.stringify(movieHistory))
-        // document.getElementById('num-span').innerHTML = movieHistory.length
+        myMovies.push(clickedMovie)
+        localStorage.setItem("myList", JSON.stringify(myMovies))
+        document.getElementById('num-span').innerHTML = myMovies.length
         document.getElementById(`add-watchlist${e.target.dataset.add}`).innerHTML = `<p class="watchlist">Added to watchlist<i class="fa-solid fa-circle-check"></i></p>`
     }
 })
