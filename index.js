@@ -69,10 +69,10 @@ document.addEventListener('click', function(e){
         const clickedMovie = allMovieArray.filter(function(movie){
             return e.target.dataset.add === movie.imdbID
         })[0]
-        const movieHistory = JSON.parse(localStorage.getItem("myList"))
-        movieHistory.push(clickedMovie)
-        localStorage.setItem("myList", JSON.stringify(movieHistory))
-        document.getElementById('num-span').innerHTML = movieHistory.length
+        // const movieHistory = JSON.parse(localStorage.getItem("myList"))
+        // movieHistory.push(clickedMovie)
+        // localStorage.setItem("myList", JSON.stringify(movieHistory))
+        // document.getElementById('num-span').innerHTML = movieHistory.length
         document.getElementById(`add-watchlist${e.target.dataset.add}`).innerHTML = `<p class="watchlist">Added to watchlist<i class="fa-solid fa-circle-check"></i></p>`
     }
 })
