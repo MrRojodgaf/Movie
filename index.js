@@ -2,7 +2,7 @@ const text = document.getElementById('text')
 const searchBtn = document.getElementById('search-btn')
 const mode = document.getElementById('mode')
 let allMovieArray = []
-let myMovies = []
+let myMovies = JSON.parse(localStorage.getItem("myList"))
 
 mode.addEventListener('click', function(){
     document.body.classList.toggle('black')
@@ -43,7 +43,25 @@ function getMovieInfo(movieArr){
 function renderMovie(array){
     let render = ''
     for(let data of array){
-        render += `<div class="movie-box">
+        const savedMovie = myMovies.find((saved) => saved.imdbID == data.imdbID)
+        if(savedMovie){
+            render += `<div class="movie-box">
+                    <img class="poster" src="${data.Poster}">
+                    <div class="data-container">
+                    <h3>${data.Title}<span><i class="fa-solid fa-star star"></i>${data.imdbRating}</span></h3>
+                    <div class="rgw-flex">
+                        <p>${data.Runtime}</p>
+                        <p class="runtime">${data.Genre}</p>
+                        <div id="add-watchlist${data.imdbID}" class="add-watchlist">
+                        <p class="watchlist">Added to watchlist<i class="fa-solid fa-circle-check"></i></p>
+                        </div>
+                    </div>
+                    <p class="plot">${data.Plot}</p>
+                    </div>
+                </div>`
+        }
+        else {
+            render += `<div class="movie-box">
                     <img class="poster" src="${data.Poster}">
                     <div class="data-container">
                     <h3>${data.Title}<span><i class="fa-solid fa-star star"></i>${data.imdbRating}</span></h3>
@@ -58,6 +76,7 @@ function renderMovie(array){
                     <p class="plot">${data.Plot}</p>
                     </div>
                 </div>`
+        }
     
     }
     document.getElementById('movie-section').innerHTML = render
@@ -67,10 +86,9 @@ searchBtn.addEventListener('click', getMovieList)
 
 document.addEventListener('click', function(e){
     if(e.target.dataset.add){
-        const clickedMovie = allMovieArray.filter(function(movie){
+        const clickedMovie = allMovieArray.find(function(movie){
             return e.target.dataset.add === movie.imdbID
-        })[0]
-        myMovies = JSON.parse(localStorage.getItem("myList"))
+        })
         myMovies.push(clickedMovie)
         localStorage.setItem("myList", JSON.stringify(myMovies))
         document.getElementById('num-span').innerHTML = myMovies.length
