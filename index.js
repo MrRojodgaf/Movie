@@ -96,6 +96,8 @@ document.addEventListener('click', function(e){
     }
 })
 
+document.getElementById('num-span').innerHTML = myMovies.length
+
 
 
 
